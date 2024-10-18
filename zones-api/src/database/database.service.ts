@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { parse, format } from 'fast-csv';
 
@@ -35,6 +35,10 @@ export class DatabaseService {
   async deleteRecordById(id: string | number): Promise<void> {
     const records = await this.getAllRecords();
     const filteredRecords = records.filter((record) => record.id !== id);
+    if (records.length === filteredRecords.length) {
+      throw new NotFoundException(`Record with id ${id} not found`);
+    }
+
     return this.writeCsv(filteredRecords);
   }
 

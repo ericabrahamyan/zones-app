@@ -1,4 +1,5 @@
 import { Box, Heading, Text, Spinner, Flex, useToast } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 
 import { useDeleteZone, useZones } from '../../hooks/useZones';
 import { Zone } from '../../types/zone';
@@ -27,16 +28,19 @@ const ZoneList: React.FC<{ onDeleteZone?: () => void }> = ({
 
         if (onDeleteZone) onDeleteZone();
       },
-      onError: (err) => {
+      onError: (error: unknown) => {
+        const description =
+          error instanceof AxiosError
+            ? error.response?.data?.message
+            : 'There was an issue while deleting the zone.';
         toast({
           position: 'top-right',
           title: 'Error deleting zone.',
-          description: 'There was an issue deleting the zone.',
+          description,
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
-        console.error('Error deleting zone:', err);
       },
     });
   };
