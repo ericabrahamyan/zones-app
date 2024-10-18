@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# Zones Management UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the **Zones Management UI**, which is part of the Zones Management App. The UI is built using **React** and **Vite**.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Technologies Used](#technologies-used)
+- [Environment Variables](#environment-variables)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Follow the steps below to set up the UI for the Zones Management App.
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Make sure you have the following installed:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- [Node.js](https://nodejs.org/en/download/) (v16+)
+- [npm](https://www.npmjs.com/get-npm)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/zones-app.git
+   ```
+
+2. Navigate to the **zones-ui** folder:
+
+   ```bash
+   cd zones-ui
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+To run the application locally, follow these steps:
+
+1. Start the UI in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and go to [http://localhost:5173](http://localhost:5173).
+
+## Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Vite**: Frontend build tool and development server.
+- **Chakra UI**: Component library for UI styling.
+- **react-query**: For data fetching and caching.
+- **axios**: HTTP client for API requests.
+
+## Environment Variables
+
+Make sure to set up the following environment variable in your `.env` file:
+
+```bash
+VITE_BACKEND_URL=http://localhost:8080/api
 ```
