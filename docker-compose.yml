@@ -1,0 +1,31 @@
+version: '3'
+services:
+  zones-api:
+    build:
+      context: ./zones-api
+    container_name: zones-api
+    ports:
+      - '8080:8080'
+    environment:
+      CSV_FILE_PATH: /data/zones.csv
+    volumes:
+      - ./zones-api/data:/data # Ensures that the CSV file is saved persistently
+    networks:
+      - zones-network
+
+  zones-ui:
+    build:
+      context: ./zones-ui
+    container_name: zones-ui
+    ports:
+      - '80:80'
+    depends_on:
+      - zones-api
+    environment:
+      VITE_BACKEND_URL: http://zones-api:8080 # Ensures communication with the backend
+    networks:
+      - zones-network
+
+networks:
+  zones-network:
+    driver: bridge

@@ -1,7 +1,11 @@
 {
   "name": "zones-app",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd zones-ui && npm run dev",
+    "dev:backend": "cd zones-api && npm run start:dev"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
