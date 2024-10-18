@@ -174,7 +174,7 @@ VITE_BACKEND_URL=http://localhost:8080/api
 
 ```
 STAGE=development
-CSV_FILE_PATH=/Users/ericabrahamyan/Documents/test.csv
+CSV_FILE_PATH=/absolute/path/to/your/csvfile.csv
 PORT=8080
 ```
 

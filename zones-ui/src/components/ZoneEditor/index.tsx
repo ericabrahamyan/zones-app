@@ -16,13 +16,13 @@ import { AxiosError } from 'axios';
 
 import useKeyPressHandlers from '../../hooks/useKeyPressHandlers';
 import { useCreateZone } from '../../hooks/useZones';
+import { InputState } from '../../types/input';
+import { Point } from '../../types/zone';
 import {
   getSvgCoordinates,
   roundCoordinates,
   sortPoints,
 } from '../../utils/coordinate';
-
-type Point = [number, number];
 
 const ZoneEditor: React.FC = () => {
   const toast = useToast();
@@ -35,12 +35,10 @@ const ZoneEditor: React.FC = () => {
     }
     return [];
   });
-  const [zoneName, setZoneName] = useState<{ value: string; touched: boolean }>(
-    () => {
-      const value = localStorage.getItem('zoneName');
-      return { value: value?.length ? value : '', touched: false };
-    },
-  );
+  const [zoneName, setZoneName] = useState<InputState<string>>(() => {
+    const value = localStorage.getItem('zoneName');
+    return { value: value?.length ? value : '', touched: false };
+  });
 
   const [selectedPointIndex, setSelectedPointIndex] = useState<number | null>(
     null,
@@ -127,6 +125,7 @@ const ZoneEditor: React.FC = () => {
             });
 
             cancelDrawing();
+            setZoneName({ value: '', touched: false });
           },
           onError: (error: unknown) => {
             const description =
