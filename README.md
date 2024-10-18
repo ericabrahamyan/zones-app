@@ -84,7 +84,7 @@ To run the application using Docker, follow these steps:
    This will:
 
    - Start the **frontend** container on [http://localhost](http://localhost).
-   - Start the **backend** container on port `3000`.
+   - Start the **backend** container on port `8080`.
 
 3. **Verify the containers are running**:
    You can check the running containers using:
@@ -112,10 +112,10 @@ npm run dev
 
 This will:
 
-- Start the **frontend** (zones-ui) development server (Vite) on [http://localhost:3000](http://localhost:3000).
-- Start the **backend** (zones-api) development server (NestJS) on [http://localhost:3001](http://localhost:3001).
+- Start the **frontend** (zones-ui) development server (Vite) on [http://localhost:5173](http://localhost:5173).
+- Start the **backend** (zones-api) development server (NestJS) on [http://localhost:8080](http://localhost:8080).
 
-You can access the application by navigating to [http://localhost:3000](http://localhost:3000).
+You can access the application by navigating to [http://localhost:5173](http://localhost:5173).
 
 #### Running Backend and Frontend Individually
 
