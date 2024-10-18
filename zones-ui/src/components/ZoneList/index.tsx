@@ -1,7 +1,8 @@
+import { Box, Heading, Text, Spinner, Flex, useToast } from '@chakra-ui/react';
+
 import { useDeleteZone, useZones } from '../../hooks/useZones';
 import { Zone } from '../../types/zone';
 import ZoneListItem from '../ZoneListItem';
-import { Box, Heading, Text, Spinner, Flex, useToast } from '@chakra-ui/react';
 
 const ZoneList: React.FC<{ onDeleteZone?: () => void }> = ({
   onDeleteZone,

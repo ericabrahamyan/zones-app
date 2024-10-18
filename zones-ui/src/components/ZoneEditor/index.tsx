@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+
 import './styles.scss';
-import { useCreateZone } from '../../hooks/useZones';
+import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
@@ -11,14 +12,15 @@ import {
   FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
-import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 import { AxiosError } from 'axios';
+
+import useKeyPressHandlers from '../../hooks/useKeyPressHandlers';
+import { useCreateZone } from '../../hooks/useZones';
 import {
   getSvgCoordinates,
   roundCoordinates,
   sortPoints,
 } from '../../utils/coordinate';
-import useKeyPressHandlers from '../../hooks/useKeyPressHandlers';
 
 type Point = [number, number];
 

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import {
   IsUUID,
   IsString,
@@ -6,6 +5,8 @@ import {
   ArrayMinSize,
   ArrayMaxSize,
 } from 'class-validator';
+import { v4 as uuidv4 } from 'uuid';
+
 import { IsPoint } from '../../../validators/IsPoint';
 
 export class Zone {

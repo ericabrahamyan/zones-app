@@ -1,10 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ZoneService } from './zone.service';
-import { DatabaseService } from '../../database/database.service';
 import { ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from '@nestjs/testing';
+import { v4 as uuidv4 } from 'uuid';
+
+import { DatabaseService } from '../../database/database.service';
+
 import { CreateZoneDto } from './dto/create-zone.dto';
 import { Zone } from './entities/zone.entity';
-import { v4 as uuidv4 } from 'uuid';
+import { ZoneService } from './zone.service';
 
 describe('ZoneService', () => {
   let service: ZoneService;

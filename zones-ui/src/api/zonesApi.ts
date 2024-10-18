@@ -1,4 +1,5 @@
 import { ZoneInput } from '../types/zone';
+
 import axiosInstance from './axiosInstance';
 
 export const fetchZones = async () => {

@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
-import { ZoneService } from './zone.service';
+
 import { CreateZoneDto } from './dto/create-zone.dto';
 import { Zone } from './entities/zone.entity';
+import { ZoneService } from './zone.service';
 
 @Controller('zone')
 export class ZoneController {

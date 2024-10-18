@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+
+import { DatabaseService } from '../../database/database.service';
+
 import { CreateZoneDto } from './dto/create-zone.dto';
 import { Zone } from './entities/zone.entity';
-import { DatabaseService } from '../../database/database.service';
 
 @Injectable()
 export class ZoneService {

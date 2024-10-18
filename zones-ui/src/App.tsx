@@ -1,5 +1,5 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Grid } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Header from './components/Header';
 import ZoneEditor from './components/ZoneEditor';

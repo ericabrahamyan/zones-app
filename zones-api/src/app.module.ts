@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { DatabaseModule } from './database/database.module';
 import { validate } from './env.validation';
 import { ZoneModule } from './resources/zone/zone.module';
-import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [

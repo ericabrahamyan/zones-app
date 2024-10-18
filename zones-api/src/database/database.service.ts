@@ -1,8 +1,9 @@
 import * as fs from 'fs';
-import * as csvParser from 'csv-parser';
+
 import { Injectable } from '@nestjs/common';
-import { format } from 'fast-csv';
 import { ConfigService } from '@nestjs/config';
+import * as csvParser from 'csv-parser';
+import { format } from 'fast-csv';
 @Injectable()
 export class DatabaseService {
   private readonly filePath: string;

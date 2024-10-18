@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZoneController } from './zone.controller';
-import { ZoneService } from './zone.service';
+
 import { CreateZoneDto } from './dto/create-zone.dto';
 import { Zone } from './entities/zone.entity';
+import { ZoneController } from './zone.controller';
+import { ZoneService } from './zone.service';
 
 describe('ZoneController', () => {
   let controller: ZoneController;

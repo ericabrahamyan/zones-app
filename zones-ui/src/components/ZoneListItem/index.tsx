@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Card,
   CardBody,
@@ -7,6 +6,7 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react';
+
 import { Zone } from '../../types/zone';
 
 interface ZoneListItemProps {
@@ -17,15 +17,14 @@ interface ZoneListItemProps {
 const ZoneListItem: React.FC<ZoneListItemProps> = ({ zone, onDelete }) => {
   return (
     <Card
-      bg="gray.400" // A slightly lighter shade than the container background for contrast
+      bg="gray.400"
       borderRadius="md"
       boxShadow="lg"
       position="relative"
       width="350px"
-      height="400px" // Adjusted height to fit SVG and footer
+      height="400px"
       overflow="hidden"
     >
-      {/* Ensure CloseButton works by using proper z-index */}
       <CloseButton
         onClick={() => onDelete(zone.id)}
         aria-label="Delete zone"
@@ -46,7 +45,7 @@ const ZoneListItem: React.FC<ZoneListItemProps> = ({ zone, onDelete }) => {
         justifyContent="center"
         alignItems="center"
         position="relative"
-        bg="gray.700" // Matches the container for a cohesive look
+        bg="gray.700"
       >
         <Box width="100%" height="300px" display="flex" justifyContent="center">
           <svg
@@ -59,8 +58,8 @@ const ZoneListItem: React.FC<ZoneListItemProps> = ({ zone, onDelete }) => {
                 .map((point: [number, number]) => point.join(','))
                 .join(' ')}
               style={{
-                fill: 'rgba(173, 216, 230, 0.3)', // Light blue with slight transparency
-                stroke: 'white', // White stroke to stand out against gray.900
+                fill: 'rgba(173, 216, 230, 0.3)',
+                stroke: 'white',
                 strokeWidth: 2,
               }}
             />
@@ -74,8 +73,8 @@ const ZoneListItem: React.FC<ZoneListItemProps> = ({ zone, onDelete }) => {
         bottom={0}
         width="100%"
         py={2}
-        bg="teal" // Lighter for the footer to stand out slightly
-        color="gray.300" // Light text color for readability
+        bg="teal"
+        color="gray.300"
         textAlign="center"
       >
         <Text fontSize="xs">{zone.name}</Text>

@@ -1,11 +1,13 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
+import { ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from '@nestjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseService } from './database.service';
-import { ConfigService } from '@nestjs/config';
-import * as fs from 'fs';
 import { Zone } from '../resources/zone/entities/zone.entity';
-import * as path from 'path';
+
+import { DatabaseService } from './database.service';
 
 const mockZones: Zone[] = [
   {
