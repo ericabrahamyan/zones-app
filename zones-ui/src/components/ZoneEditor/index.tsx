@@ -314,13 +314,6 @@ const ZoneEditor: React.FC = () => {
           Reset
         </Button>
       </Box>
-      <pre>
-        {JSON.stringify(
-          { drawingPoints: roundCoordinates(drawingPoints) },
-          null,
-          2,
-        )}
-      </pre>
     </Box>
   );
 };
