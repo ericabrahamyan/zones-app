@@ -1,9 +1,8 @@
 import * as fs from 'fs';
-
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as csvParser from 'csv-parser';
-import { format } from 'fast-csv';
+import { parse, format } from 'fast-csv';
+
 @Injectable()
 export class DatabaseService {
   private readonly filePath: string;
@@ -19,7 +18,7 @@ export class DatabaseService {
     const results: any[] = [];
     return new Promise((resolve, reject) => {
       fs.createReadStream(this.filePath)
-        .pipe(csvParser())
+        .pipe(parse({ headers: true }))
         .on('data', (data) => results.push(this.deserializeRecord(data)))
         .on('end', () => resolve(results))
         .on('error', (err) => reject(err));
