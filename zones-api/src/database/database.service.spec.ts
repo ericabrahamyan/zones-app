@@ -1,20 +1,38 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { DatabaseService } from './database.service';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
+import { Zone } from '../resources/zone/entities/zone.entity';
 import * as path from 'path';
+
+const mockZones: Zone[] = [
+  {
+    id: uuidv4(),
+    name: 'Zone 1',
+    points: [
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ],
+  },
+  {
+    id: uuidv4(),
+    name: 'Zone 2',
+    points: [
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ],
+  },
+];
 
 describe('DatabaseService', () => {
   let service: DatabaseService;
-  let testFilePath: string;
-
-  beforeAll(() => {
-    // Define the path to the test CSV file
-    testFilePath = path.join(__dirname, 'test.csv');
-
-    // Ensure the file exists before starting tests
-    fs.writeFileSync(testFilePath, 'id,name\n');
-  });
+  const testFilePath = path.join(process.cwd(), `test.csv`);
 
   afterAll(() => {
     // Clean up the test file after tests are done
@@ -44,12 +62,10 @@ describe('DatabaseService', () => {
 
   describe('insertRecord', () => {
     it('should insert a record into the CSV', async () => {
-      const newRecord = { id: '1', name: 'John Doe' };
+      const newRecord = mockZones[0];
 
-      // Insert the new record
       await service.insertRecord(newRecord);
 
-      // Read the file contents and verify
       const records = await service.getAllRecords();
       expect(records).toContainEqual(newRecord);
     });
@@ -57,29 +73,21 @@ describe('DatabaseService', () => {
 
   describe('getAllRecords', () => {
     it('should read all records from the CSV', async () => {
-      const newRecord = { id: '2', name: 'Jane Doe' };
+      const newRecord = mockZones[1];
 
-      // Insert another record to test reading
       await service.insertRecord(newRecord);
 
-      // Retrieve all records
       const records = await service.getAllRecords();
-      expect(records).toEqual(
-        expect.arrayContaining([
-          { id: '1', name: 'John Doe' },
-          { id: '2', name: 'Jane Doe' },
-        ]),
-      );
+      expect(records).toEqual(expect.arrayContaining(mockZones));
     });
   });
 
   describe('deleteRecordById', () => {
     it('should delete a record by ID', async () => {
-      const idToDelete = '1';
+      const idToDelete = mockZones[0].id;
       await service.deleteRecordById(idToDelete);
-      // Verify that the record is deleted
       const records = await service.getAllRecords();
-      expect(records).not.toContainEqual({ id: idToDelete, name: 'John Doe' });
+      expect(records).not.toContainEqual(mockZones[0]);
     });
   });
 });

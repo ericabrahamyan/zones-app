@@ -1,6 +1,5 @@
 import { plainToInstance } from 'class-transformer';
-import { IsEnum, IsNumber, validateSync } from 'class-validator';
-import { IsPath } from './validators/isPath';
+import { IsEnum, IsNumber, IsString, validateSync } from 'class-validator';
 
 enum EnvStage {
   Development = 'development',
@@ -14,8 +13,8 @@ class EnvironmentVariables {
   @IsNumber()
   PORT: number;
 
-  @IsPath()
-  ZONES_CSV_PATH: string;
+  @IsString()
+  CSV_FILE_PATH: string;
 }
 
 export function validate(config: Record<string, unknown>) {
