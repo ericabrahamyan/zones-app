@@ -1,4 +1,4 @@
-type Point = [number, number];
+export type Point = [number, number];
 
 export interface Zone {
   id: string;

@@ -13,6 +13,12 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 import { AxiosError } from 'axios';
+import {
+  getSvgCoordinates,
+  roundCoordinates,
+  sortPoints,
+} from '../../utils/coordinate';
+import useKeyPressHandlers from '../../hooks/useKeyPressHandlers';
 
 type Point = [number, number];
 
@@ -52,40 +58,9 @@ const ZoneEditor: React.FC = () => {
 
   const { mutate: createZone } = useCreateZone();
 
-  function roundCoordinates(
-    coordinates: [number, number][],
-  ): [number, number][] {
-    return coordinates.map(([x, y]) => [
-      parseFloat(x.toFixed(2)),
-      parseFloat(y.toFixed(2)),
-    ]);
-  }
-
-  const getCentroid = (points: Point[]) => {
-    const centroid = points.reduce(
-      (acc, [x, y]) => {
-        acc[0] += x;
-        acc[1] += y;
-        return acc;
-      },
-      [0, 0],
-    );
-
-    return [centroid[0] / points.length, centroid[1] / points.length] as Point;
-  };
-
   const updatePoints = (points: Point[]) => {
     const newPoints = points.length === 4 ? sortPoints(points) : points;
     setDrawingPoints(newPoints);
-  };
-
-  const sortPoints = (points: Point[]) => {
-    const centroid = getCentroid(points);
-    return points.sort((a, b) => {
-      const angleA = Math.atan2(a[1] - centroid[1], a[0] - centroid[0]);
-      const angleB = Math.atan2(b[1] - centroid[1], b[0] - centroid[0]);
-      return angleA - angleB;
-    });
   };
 
   const handleSvgClick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -124,36 +99,10 @@ const ZoneEditor: React.FC = () => {
     }
   };
 
-  const handleEscapePress = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setIsDrawing(false);
-      setDrawingPoints([]);
-      setCurrentMousePosition([0, 0]);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleEscapePress);
-    return () => {
-      window.removeEventListener('keydown', handleEscapePress);
-    };
-  }, []);
-
-  const getPolygonPoints = () => {
-    if (isDrawing && drawingPoints.length < 4 && drawingPoints.length > 0) {
-      return [...drawingPoints, currentMousePosition];
-    }
-    return drawingPoints;
-  };
-
-  const getSvgCoordinates = (e: React.MouseEvent<SVGSVGElement>) => {
-    const svg = (e.target as Element).closest('svg') as SVGSVGElement;
-    const point = svg.createSVGPoint();
-    point.x = e.clientX;
-    point.y = e.clientY;
-    const ctm = svg.getScreenCTM()!.inverse();
-    const transformedPoint = point.matrixTransform(ctm);
-    return { x: transformedPoint.x, y: transformedPoint.y };
+  const cancelDrawing = () => {
+    setIsDrawing(false);
+    setDrawingPoints([]);
+    setCurrentMousePosition([0, 0]);
   };
 
   const handleCreateZone = () => {
@@ -175,9 +124,7 @@ const ZoneEditor: React.FC = () => {
               isClosable: true,
             });
 
-            setDrawingPoints([]);
-            setZoneName({ value: '', touched: false });
-            setIsDrawing(false);
+            cancelDrawing();
           },
           onError: (error: unknown) => {
             const description =
@@ -198,6 +145,18 @@ const ZoneEditor: React.FC = () => {
     }
   };
 
+  useKeyPressHandlers({
+    onEscape: cancelDrawing,
+    onEnter: handleCreateZone,
+  });
+
+  const getPolygonPoints = () => {
+    if (isDrawing && drawingPoints.length < 4 && drawingPoints.length > 0) {
+      return [...drawingPoints, currentMousePosition];
+    }
+    return drawingPoints;
+  };
+
   return (
     <Box
       borderRadius={0}
@@ -213,7 +172,6 @@ const ZoneEditor: React.FC = () => {
         Click on the SVG to draw the polygon (4 points required)
       </Text>
 
-      {/* SVG Editor */}
       <Box>
         <svg
           className="zone-editor__svg"
@@ -286,7 +244,6 @@ const ZoneEditor: React.FC = () => {
         </FormControl>
       </Box>
 
-      {/* Buttons underneath */}
       <Box mt={4}>
         <Button
           leftIcon={<AddIcon />}
