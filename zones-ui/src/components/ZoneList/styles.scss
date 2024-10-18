@@ -1,0 +1,32 @@
+.zone-list-section {
+  flex-grow: 1;
+  background-color: #f7f7f7;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 300px - 60px); /* Adjust height when stacked */
+  }
+}
+
+.zone-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.zone-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .zone-items {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
