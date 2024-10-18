@@ -1,73 +1,104 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Here is the updated **zones-api** README with the **end-to-end (e2e) tests** section removed:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Zones Management API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This repository contains the **Zones Management API**, which is part of the Zones Management App. The API is built using **NestJS** and provides endpoints for zone management.
 
-## Description
+## Table of Contents
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Running Tests](#running-tests)
+- [Technologies Used](#technologies-used)
+- [Environment Variables](#environment-variables)
+- [API Endpoints](#api-endpoints)
 
-## Installation
+## Getting Started
+
+Follow the steps below to set up the API for the Zones Management App.
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/en/download/) (v16+)
+- [npm](https://www.npmjs.com/get-npm)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/zones-app.git
+   ```
+
+2. Navigate to the **zones-api** folder:
+
+   ```bash
+   cd zones-api
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+To run the application locally, follow these steps:
+
+1. Start the API in development mode:
+
+   ```bash
+   npm run start:dev
+   ```
+
+2. The API will be running on [http://localhost:8080](http://localhost:8080).
+
+## Running Tests
+
+To run the tests for the API, you can use the following commands:
+
+- **Run all unit tests**:
+
+  ```bash
+  npm run test
+  ```
+
+- **Run tests in watch mode** (useful during development):
+
+  ```bash
+  npm run test:watch
+  ```
+
+- **Generate test coverage report**:
+
+  ```bash
+  npm run test:cov
+  ```
+
+## Technologies Used
+
+- **NestJS**: Framework for building scalable server-side applications.
+- **CSV-parser** and **fast-csv**: Libraries for handling CSV file operations.
+- **class-validator** and **class-transformer**: Used for request validation and transformation.
+- **Jest**: Testing framework for unit tests.
+
+## Environment Variables
+
+Make sure to set up the following environment variables in your `.env` file:
 
 ```bash
-$ npm install
+STAGE=development
+CSV_FILE_PATH=/absolute/path/to/your/csvfile.csv
+PORT=8080
 ```
 
-## Running the app
+## API Endpoints
 
-```bash
-# development
-$ npm run start
+The backend API exposes the following endpoints:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- **GET api/zones**: Retrieve all zones.
+- **DELETE api/zone/:id**: Delete a specific zone by ID.
+- **POST api/zone**: Create a new zone with a body containing `{ name: string, points: [number, number][] }`.
