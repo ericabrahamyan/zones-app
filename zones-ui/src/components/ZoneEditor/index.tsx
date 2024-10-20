@@ -29,7 +29,9 @@ const ZoneEditor: React.FC = () => {
 
   const [drawingPoints, setDrawingPoints] = useState<Point[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem('drawingPoints') || '[]');
+      return sortPoints(
+        JSON.parse(localStorage.getItem('drawingPoints') || '[]'),
+      );
     } catch (err) {
       console.error('Unable to restore state from draft.', err);
     }
